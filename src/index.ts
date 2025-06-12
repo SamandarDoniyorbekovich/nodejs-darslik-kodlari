@@ -2,7 +2,8 @@ import express, { Request, Response } from "express";
 import sequelize from "./db/database";
 import productRouter from "./routes/product.routes";
 import userRouter from "./routes/user.routes";
-import { loggerMiddleware } from "./middleware/logger.middleware";
+import countrRouter from "./routes/country.routes";
+import capitalRouter from "./routes/capital.routes";
 import { errorMiddleware } from "./middleware/errorMiddleware";
 
 const port = 5001;
@@ -16,6 +17,8 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/products", productRouter)
 app.use("/users", userRouter)
+app.use("/country", countrRouter)
+app.use("/capital", capitalRouter)
 app.use(errorMiddleware)
 
 const serverStart = () => {
