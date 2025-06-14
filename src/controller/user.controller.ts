@@ -77,7 +77,7 @@ export const UserController = {
             return
         }
 
-        const deleteUser = await User.destroy({
+        const deletedUser = await User.destroy({
             where:{
                 id:userId
             }

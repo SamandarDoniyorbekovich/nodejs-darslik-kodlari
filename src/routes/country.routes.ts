@@ -6,5 +6,6 @@ const router = Router();
 router.get("/", countryController.getAllCountry);
 
 router.post("/", countryController.createCountry);
+router.delete("/:id", countryController.deleteCountry);
 
 export default router;

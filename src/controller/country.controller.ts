@@ -15,21 +15,39 @@ export const countryController = {
         }
     },
 
-    async createCountry(req: Request, res: Response, next:NextFunction) {
+    async createCountry(req: Request, res: Response, next: NextFunction) {
         try {
             const { name } = req.body
 
-            const newCountry = Country.create({ name })
+            const newCountry = await Country.create({ name })
 
             res.status(201).json({
                 ok: true,
-                message: "Country created",
-                data: newCountry
+                data: newCountry,
+                message: "Country created"
             })
 
         } catch (error) {
             next(error)
         }
 
+    },
+
+    async deleteCountry(req: Request, res: Response) {
+        const countryId = req.params.id
+
+        const targetCountryId = await Country.findByPk(countryId)
+
+       const deletedCountry = await Country.destroy({
+            where:{
+                id:countryId
+            }
+        })
+
+        res.status(200).json({
+            ok:true,
+            message:"Delete country"
+        })
+        
     }
 }
