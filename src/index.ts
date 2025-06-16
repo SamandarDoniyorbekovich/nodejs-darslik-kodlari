@@ -4,6 +4,7 @@ import productRouter from "./routes/product.routes";
 import userRouter from "./routes/user.routes";
 import countrRouter from "./routes/country.routes";
 import capitalRouter from "./routes/capital.routes";
+import categoryRouter from "./routes/category.routes";
 import { errorMiddleware } from "./middleware/errorMiddleware";
 import Relations from "./models/relations";
 
@@ -20,6 +21,7 @@ app.use("/products", productRouter)
 app.use("/users", userRouter)
 app.use("/country", countrRouter)
 app.use("/capital", capitalRouter)
+app.use("/category", categoryRouter)
 app.use(errorMiddleware)
 
 const serverStart = () => {

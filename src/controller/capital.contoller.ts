@@ -10,7 +10,7 @@ export const capitalController = {
                 include:{
                     model:Country,
                     attributes:{
-                        exclude:['createdAt']
+                        exclude:['createdAt', 'updatedAt']
                     }
                 }
             })

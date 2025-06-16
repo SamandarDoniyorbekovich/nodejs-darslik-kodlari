@@ -1,10 +1,15 @@
 import { NextFunction, Request, Response } from "express";
 import { Product } from "../models/product.model";
 import { CustomError } from "../helpers/CustomError";
+import { Category } from "../models/category.model";
 
 export const ProductController = {
   async getAllProducts(req: Request, res: Response) {
-    const products = await Product.findAll();
+    const products = await Product.findAll({
+      include:{
+        model:Category
+      }
+    });
     res.status(200).json({
       ok: true,
       data: products,
@@ -12,12 +17,12 @@ export const ProductController = {
   },
   async createProduct(req: Request, res: Response, next:NextFunction) {
     try {
-      const { title, description, price, store } = req.body;      
+      const { title, description, price, store, category_id } = req.body;      
       if (!title || !description || !price || !store) {
         throw new CustomError("imput all data", 403, "description")
       }
 
-      const newProduct = await Product.create({ title, description, price, store });
+      const newProduct = await Product.create({ title, description, price, store,category_id });
 
       res.status(201).json({
         ok: true,
