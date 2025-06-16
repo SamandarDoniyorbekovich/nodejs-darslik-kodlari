@@ -5,6 +5,9 @@ import userRouter from "./routes/user.routes";
 import countrRouter from "./routes/country.routes";
 import capitalRouter from "./routes/capital.routes";
 import categoryRouter from "./routes/category.routes";
+import StudentRoutes from "./routes/student.routes";
+import TeacherRoutes from "./routes/teacher.routes";
+import GroupRoutes from "./routes/group.routes";
 import { errorMiddleware } from "./middleware/errorMiddleware";
 import Relations from "./models/relations";
 
@@ -22,12 +25,15 @@ app.use("/users", userRouter)
 app.use("/country", countrRouter)
 app.use("/capital", capitalRouter)
 app.use("/category", categoryRouter)
+app.use("/students", StudentRoutes)
+app.use("/teachers", TeacherRoutes)
+app.use("/groups", GroupRoutes)
 app.use(errorMiddleware)
 
 const serverStart = () => {
   sequelize.authenticate();
   console.log("Database connected successfully");
-  sequelize.sync();
+  sequelize.sync({});
   Relations()
   // console.log("Models connnected");
   app.listen(port, () => {
