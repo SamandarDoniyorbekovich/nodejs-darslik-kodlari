@@ -27,7 +27,6 @@ export const GroupController = {
       const student = await Student.findByPk(student_id);
 
       if (teacher && student) {
-        //@ts-ignore
         // await teacher.addStudent(student);
         await student.addTeacher(teacher);
       } else {
